@@ -4,8 +4,8 @@ name=ivolgadev
 info_html=🌍 From: Russia<br>🐍 Python Developer
 tag1=ivolga
 tag2=Ivolga
-btn_telegram=https://t.me/Iivolllga
+btn_telegram=Telegram 
 btn_github=GitHub
-btn_modules=нету
-btn_donate=https://vtb.paymo.ru/collect-money/?transaction=3852e8e5-3d46-47ea-a419-05bc1e2eac03
+btn_modules= coming soon...
+btn_donate= Donate
 footer=Created by Ivolga
