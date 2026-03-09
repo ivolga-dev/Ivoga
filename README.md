@@ -105,3 +105,31 @@ brew install nginx
 - `texts.txt`
 - `resources.txt`
 - файл аватарки (например, `avatar.jpg`)
+
+
+## Быстрое развёртывание на Ubuntu из GitHub
+
+Репозиторий для развёртывания:
+
+- https://github.com/Igor639285/Ivoga
+
+Готовая команда для сервера Ubuntu (клонирование + публикация через Nginx):
+
+```bash
+sudo apt update && sudo apt install -y nginx git && cd /tmp && rm -rf Ivoga && git clone https://github.com/Igor639285/Ivoga && sudo rm -rf /var/www/bio && sudo mkdir -p /var/www/bio && sudo cp -r /tmp/Ivoga/* /var/www/bio/ && sudo tee /etc/nginx/sites-available/bio > /dev/null <<'NGINX'
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/bio;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+NGINX
+sudo ln -sf /etc/nginx/sites-available/bio /etc/nginx/sites-enabled/bio && sudo rm -f /etc/nginx/sites-enabled/default && sudo nginx -t && sudo systemctl restart nginx
+```
+
+После выполнения откройте IP сервера в браузере: `http://YOUR_SERVER_IP`.
