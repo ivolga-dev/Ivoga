@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Bio</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#0b0b12;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+
+/* карточка */
+
+.card{
+width:340px;
+padding:35px;
+border-radius:25px;
+background:#141421;
+text-align:center;
+box-shadow:0 0 40px rgba(140,80,255,0.5);
+position:relative;
+z-index:2;
+}
+
+/* аватар */
+
+.avatar{
+width:90px;
+height:90px;
+border-radius:50%;
+border:3px solid #7b5cff;
+box-shadow:0 0 20px #7b5cff;
+}
+
+/* текст */
+
+h2{
+margin:15px 0 5px 0;
+font-weight:600;
+letter-spacing:2px;
+}
+
+.info{
+color:#aaa;
+font-size:14px;
+margin-bottom:20px;
+}
+
+/* кнопки */
+
+.btn{
+display:block;
+background:#6e59ff;
+padding:14px;
+margin:12px 0;
+border-radius:14px;
+text-decoration:none;
+color:white;
+font-weight:500;
+transition:0.25s;
+box-shadow:0 5px 20px rgba(100,80,255,0.4);
+}
+
+.btn:hover{
+transform:scale(1.05);
+background:#7d6aff;
+}
+
+/* снег */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="snow"></canvas>
+
+<div class="card">
+
+<img src="avatar.jpg" class="avatar" alt="avatar">
+
+<h2>codrago</h2>
+
+<div class="info">
+🌍 From: Russia<br>
+🐍 Python Developer
+</div>
+
+<a class="btn" href="#">Telegram</a>
+<a class="btn" href="#">GitHub</a>
+<a class="btn" href="#">Modules</a>
+<a class="btn" href="#">Donate</a>
+
+</div>
+
+<script>
+
+/* снег */
+
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let snowflakes = [];
+
+for(let i=0;i<150;i++){
+snowflakes.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*3+1,
+d:Math.random()*1
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+ctx.beginPath();
+
+for(let i=0;i<snowflakes.length;i++){
+let f=snowflakes[i];
+ctx.moveTo(f.x,f.y);
+ctx.arc(f.x,f.y,f.r,0,Math.PI*2,true);
+}
+
+ctx.fill();
+move();
+}
+
+function move(){
+for(let i=0;i<snowflakes.length;i++){
+let f=snowflakes[i];
+f.y+=f.d+1;
+
+if(f.y>canvas.height){
+f.y=0;
+f.x=Math.random()*canvas.width;
+}
+}
+}
+
+setInterval(draw,25);
+
+</script>
+
+</body>
+</html>
