@@ -1,1 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bio</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #111111;
+      --panel-border: #2b2b2b;
+      --text-main: #f2f2f2;
+      --text-muted: #b0b0b0;
+      --btn: #1f1f1f;
+      --btn-hover: #2c2c2c;
+      --btn-border: #3b3b3b;
+      --glow: rgba(255, 255, 255, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Consolas", "Courier New", monospace;
+      background: radial-gradient(circle at 50% -10%, #1b1b1b 0%, var(--bg) 55%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 420px);
+      border-radius: 28px;
+      border: 2px solid var(--panel-border);
+      background: linear-gradient(180deg, #171717 0%, #101010 100%);
+      padding: 34px 24px 24px;
+      text-align: center;
+      box-shadow:
+        0 0 28px var(--glow),
+        0 0 120px rgba(255, 255, 255, 0.1);
+    }
+
+    .avatar-wrap {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 70%);
+    }
+
+    .avatar {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #5b5b5b;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.22);
+      background: #2e2e2e;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 8vw, 52px);
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      margin: 12px 0 18px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      font-size: 15px;
+      min-height: 48px;
+    }
+
+    .tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid #4f4f4f;
+      background: #242424;
+      color: #d9d9d9;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .links {
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn {
+      display: block;
+      border-radius: 14px;
+      border: 1px solid var(--btn-border);
+      background: var(--btn);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 18px;
+      padding: 14px 12px;
+      transition: .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: var(--btn-hover);
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid #2f2f2f;
+      color: #8f8f8f;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="snow"></canvas>
+
+  <main class="card">
+    <div class="avatar-wrap">
+      <img id="avatar" class="avatar" src="avatar.jpg" alt="avatar">
+    </div>
+
+    <h1 id="name">codrago</h1>
+
+    <div id="info" class="subtitle">🌍 From: Russia<br>🐍 Python Developer</div>
+
+    <div class="tags">
+      <a id="tag1" class="tag" href="#">Heroku</a>
+      <a id="tag2" class="tag" href="#">heroku-tl</a>
+    </div>
+
+    <div class="links">
+      <a id="telegram" class="btn" href="#">Telegram</a>
+      <a id="github" class="btn" href="#">GitHub</a>
+      <a id="modules" class="btn" href="#">Modules</a>
+      <a id="donate" class="btn" href="#">Donate</a>
+    </div>
+
+    <div id="footer" class="footer">Created by @exodiast</div>
+  </main>
+
+  <script>
+    const parseKeyValueTxt = (text) => {
+      const map = {};
+      text.split(/\r?\n/).forEach((line) => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const idx = trimmed.indexOf('=');
+        if (idx === -1) return;
+        const key = trimmed.slice(0, idx).trim();
+        const value = trimmed.slice(idx + 1).trim();
+        map[key] = value;
+      });
+      return map;
+    };
+
+    const applyConfig = async () => {
+      try {
+        const [textRaw, resourcesRaw] = await Promise.all([
+          fetch('texts.txt').then((r) => r.text()),
+          fetch('resources.txt').then((r) => r.text())
+        ]);
+
+        const textCfg = parseKeyValueTxt(textRaw);
+        const resourceCfg = parseKeyValueTxt(resourcesRaw);
+
+        const setText = (id, key) => {
+          if (textCfg[key]) document.getElementById(id).innerHTML = textCfg[key];
+        };
+        const setHref = (id, key) => {
+          if (resourceCfg[key]) document.getElementById(id).href = resourceCfg[key];
+        };
+
+        if (resourceCfg.avatar_file) {
+          document.getElementById('avatar').src = resourceCfg.avatar_file;
+        }
+
+        setText('name', 'name');
+        setText('info', 'info_html');
+        setText('tag1', 'tag1');
+        setText('tag2', 'tag2');
+        setText('telegram', 'btn_telegram');
+        setText('github', 'btn_github');
+        setText('modules', 'btn_modules');
+        setText('donate', 'btn_donate');
+        setText('footer', 'footer');
+
+        setHref('tag1', 'tag1_url');
+        setHref('tag2', 'tag2_url');
+        setHref('telegram', 'telegram_url');
+        setHref('github', 'github_url');
+        setHref('modules', 'modules_url');
+        setHref('donate', 'donate_url');
+      } catch (err) {
+        console.warn('Config files not loaded, using fallback HTML values.', err);
+      }
+    };
+
+    applyConfig();
+
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    const flakesCount = 160;
+    let flakes = [];
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    const initFlakes = () => {
+      flakes = Array.from({ length: flakesCount }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2.4 + 0.6,
+        s: Math.random() * 1 + 0.35
+      }));
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.beginPath();
+
+      flakes.forEach((f) => {
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      });
+
+      ctx.fill();
+
+      flakes.forEach((f) => {
+        f.y += f.s;
+        if (f.y > canvas.height + f.r) {
+          f.y = -f.r;
+          f.x = Math.random() * canvas.width;
+        }
+      });
+
+      requestAnimationFrame(draw);
+    };
+
+    resize();
+    initFlakes();
+    window.addEventListener('resize', () => {
+      resize();
+      initFlakes();
+    });
+    draw();
+  </script>
+</body>
+</html>
 

@@ -133,3 +133,27 @@ sudo ln -sf /etc/nginx/sites-available/bio /etc/nginx/sites-enabled/bio && sudo 
 ```
 
 После выполнения откройте IP сервера в браузере: `http://YOUR_SERVER_IP`.
+
+
+## Автоустановка на Ubuntu (белый IP)
+
+Добавлен скрипт `install.sh`, который автоматически:
+
+- установит `nginx`, `git`, `curl`;
+- скачает проект `https://github.com/Igor639285/Ivoga`;
+- развернёт сайт в `/var/www/bio`;
+- настроит и перезапустит Nginx;
+- покажет URL по вашему белому IP.
+
+Запуск на Ubuntu сервере:
+
+```bash
+chmod +x install.sh
+./install.sh
+```
+
+Если ветка не `main`, можно указать её так:
+
+```bash
+BRANCH=master ./install.sh
+```
