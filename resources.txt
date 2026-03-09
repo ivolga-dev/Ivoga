@@ -1,0 +1,13 @@
+# Ресурсы и ссылки сайта (формат: ключ=значение)
+# Как назвать аватарку:
+# - Поместите изображение рядом с index.html.
+# - Назовите файл так же, как значение avatar_file (по умолчанию avatar.jpg).
+# - Допустимые форматы: .jpg, .jpeg, .png, .webp
+avatar_file=avatar.jpg
+
+tag1_url=https://www.heroku.com/
+tag2_url=https://heroku.com/
+telegram_url=https://t.me/your_username
+github_url=https://github.com/your_username
+modules_url=https://example.com/modules
+donate_url=https://example.com/donate
