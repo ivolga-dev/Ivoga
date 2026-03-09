@@ -5,9 +5,9 @@
 # - Допустимые форматы: .jpg, .jpeg, .png, .webp
 avatar_file=avatar.jpg
 
-tag1_url=https://www.heroku.com/
-tag2_url=https://heroku.com/
-telegram_url=https://t.me/your_username
+tag1_url=coming soon
+tag2_url=coming soon
+telegram_url=https://t.me/Iivolllga
 github_url=https://github.com/your_username
-modules_url=https://example.com/modules
-donate_url=https://example.com/donate
+modules_url=https://example.com/
+donate_url=https://vtb.paymo.ru/collect-money/?transaction=3852e8e5-3d46-47ea-a419-05bc1e2eac03
