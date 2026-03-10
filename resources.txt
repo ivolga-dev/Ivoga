@@ -3,7 +3,7 @@
 # - Поместите изображение рядом с index.html.
 # - Назовите файл так же, как значение avatar_file (по умолчанию avatar.jpg).
 # - Допустимые форматы: .jpg, .jpeg, .png, .webp
-avatar_file=avatar.jpg
+avatar_file=avatar.png
 
 tag1_url=coming soon
 tag2_url=coming soon
