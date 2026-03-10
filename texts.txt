@@ -1,9 +1,9 @@
 # Редактируйте тексты сайта здесь (формат: ключ=значение).
 # Для переноса строки используйте <br> внутри значения.
-name=ivolgadev
-info_html=🌍 From: Russia<br>🐍 Python Developer
-tag1=ivolga
-tag2=Ivolga
+name=ivolga
+info_html=🌐 From: Russia<br> Python Developer
+tag1=coming soon
+tag2=coming soon 
 btn_telegram=Telegram 
 btn_github=GitHub
 btn_modules= coming soon...
