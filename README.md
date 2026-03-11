@@ -131,9 +131,9 @@ brew install nginx
 Готовая команда для сервера Ubuntu (клонирование + публикация через Nginx):
 
 ```bash
-sudo apt update && sudo apt install -y nginx git && cd /tmp && rm -rf Ivoga && git clone https://github.com/Igor639285/Ivoga && sudo rm -rf /var/www/bio && sudo mkdir -p /var/www/bio && sudo cp -r /tmp/Ivoga/* /var/www/bio/ && sudo tee /etc/nginx/sites-available/bio > /dev/null <<'NGINX'
+sudo apt update && sudo apt install -y nginx git && cd /tmp && rm -rf Ivoga && git clone https://github.com/ivolga-dev/Ivoga && sudo rm -rf /var/www/bio && sudo mkdir -p /var/www/bio && sudo cp -r /tmp/Ivoga/* /var/www/bio/ && sudo tee /etc/nginx/sites-available/bio > /dev/null <<'NGINX'
 server {
-    listen 80;
+    listen 443;
     server_name _;
 
     root /var/www/bio;

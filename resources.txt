@@ -3,18 +3,18 @@
 # - Поместите изображение рядом с index.html.
 # - Назовите файл так же, как значение avatar_file (по умолчанию avatar.jpg).
 # - Допустимые форматы: .jpg, .jpeg, .png, .webp
-avatar_file=avatar.jpg
+avatar_file=avatar.png
 
 # PNG-иконки перед кнопками (рекомендуемый размер: 20x20 - 28x28)
 # Можно заменить своими файлами, оставив формат .png
-icon_telegram_png=
-icon_github_png=
-icon_modules_png=
-icon_donate_png=
+icon_telegram_png= telegram.png
+icon_github_png= github.png
+icon_modules_png= projects.png
+icon_donate_png= donate.png
 
-tag1_url=https://www.heroku.com/
-tag2_url=https://heroku.com/
-telegram_url=https://t.me/your_username
-github_url=https://github.com/your_username
-modules_url=https://example.com/modules
-donate_url=https://example.com/donate
+tag1_url=coming soon
+tag2_url=coming soon
+telegram_url=https://t.me/Iivolllga
+github_url=https://github.com/ivolga-dev
+modules_url=https://example.com/
+donate_url=https://t.me/send?start=IVXukLkKxNDo
