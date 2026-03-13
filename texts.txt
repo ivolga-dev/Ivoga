@@ -8,4 +8,4 @@ btn_telegram=Telegram
 btn_github=GitHub
 btn_modules=Projects
 btn_donate=Donate
-footer=Created by @Iivolllga
+footer=Created by @Ivolgadev
