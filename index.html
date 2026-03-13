@@ -30,7 +30,7 @@
       overflow: hidden;
       padding: 20px;
     }
-    <audio id="bgmusic" src="1.mp3" loop></audio>
+    
 
     canvas {
       position: fixed;
@@ -147,6 +147,7 @@
   </style>
 </head>
 <body>
+  <audio id="bgmusic" src="./1.mp3" loop></audio>
   <canvas id="snow"></canvas>
 
   <main class="card">
@@ -311,7 +312,7 @@
     document.addEventListener("click", () => {
   const a = document.getElementById("bgmusic");
   if (a.paused) a.play();
-});
+  });
   </script>
 </body>
 </html>
