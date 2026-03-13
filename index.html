@@ -30,7 +30,7 @@
       overflow: hidden;
       padding: 20px;
     }
-    <audio src="1.mp3" autoplay loop></audio>
+    <audio id="bgmusic" src="1.mp3" loop></audio>
 
     canvas {
       position: fixed;
@@ -308,6 +308,10 @@
       initFlakes();
     });
     draw();
+    document.addEventListener("click", () => {
+  const a = document.getElementById("bgmusic");
+  if (a.paused) a.play();
+});
   </script>
 </body>
 </html>
